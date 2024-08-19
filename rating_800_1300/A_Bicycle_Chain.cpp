@@ -69,78 +69,53 @@ void printMap(const std::map<K, V> &m)
 #define debug(x) ;
 #endif
 
-class Solution {
+void solve()
+{
+   /* int n;
+    cout << "Print i/p " << endl;
+    readInput(n);
+    cout << n << endl;
+    print(n);
 
-    public:
-    void solve(){
-        int n;cin >>n;
-        vector<pair<int,int>> v(n);
+    // double number = 3.14;
+    std::vector<int> vec = {1, 2, 3};
+    std::map<std::string, int> m = {{"one", 1}, {"two", 2}, {"three", 3}};
 
-        for(int i=0;i<n;i++){
-            int d;cin >>d;
-            v[i] = {d,i+1};
-        }
+    // // Printing different types
+    // print(number);
+    cout << "print vector with " << endl;
+    printVector(vec);
+    printMap(m); */
 
-        if(n == 1){
-            print(1);
-            return;
-        }
+    //----------------- START TO CODE FROM HERE
+    int n;cin >> n;
+    vector<int>A(n);
+    for(int i=0;i<n;i++) cin >> A[i];
 
-        sort(v.begin(),v.end());
+    int m;cin >> m;
+    vector<int>B(m);
+    for(int i=0;i<m;i++) cin >> B[i];
 
-        for(int i=1;i<n;i++){
-            int last = v[i-1].first,curr=v[i].first;
-            if(last == curr){
-                print("Still Rozdil");
-                return;
+    //now count maximum value pair
+    int maxi =INT_MIN,res=0,ele=-1;
+
+    for(int i=0;i<n;i++){
+        
+        for(int j=0;j<m;j++){
+            int ratio = B[j]/A[i];
+            int mod = B[j]%A[i];
+            if(mod != 0) continue;
+            if(ratio == maxi && ele != A[i]) res ++;
+            else if(ratio > maxi) {
+                res = 1;
+                ele = A[i];
+                maxi = ratio;
             }
         }
-
-        cout << v[0].second <<endl;
     }
-    /*
-        void solve(){
 
-            int n;cin >> n;
-            vector<int>v(n);
-
-            for(int i=0;i<n;i++) cin >> v[i];
-
-            if(n == 1) {
-                print(1);
-                return;
-            }
-            int res =1 ,mini=v[0],last=v[0];
-            bool isStillRoz = false,isMoveRes = true;
-
-            //o/w we need to traverse array
-            for(int i=1;i<n;i++){
-                int curr = v[i];
-                mini = min(mini,curr);
-
-                // still rozdil
-                if(curr < last && isMoveRes ) res ++;
-
-                else if(curr <= mini){
-                    isStillRoz = true;
-                    break;
-                }
-
-                if(curr > last) isMoveRes = false;
-
-                last = curr;
-            }
-
-            if(isStillRoz){
-                print("Still Rozdil");
-                return;
-            }
-            print(res);
-
-
-        }
-
-*/};
+    cout << res <<endl;
+}
 
 int main()
 {
@@ -152,13 +127,12 @@ int main()
     auto start1 = high_resolution_clock::now();
     // int t; readInput(t);
     int t=1;
-    for(int tc=0;tc<t;tc++){
-        Solution* sol = new Solution();
-        sol->solve();
-    }
+    for(int tc=0;tc<t;tc++)
+        solve();
     auto stop1 = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop1 - start1);
 #ifdef nik4furi
     cerr << "Time: " << duration.count() / 1000 << endl;
 #endif
 }
+

@@ -69,78 +69,53 @@ void printMap(const std::map<K, V> &m)
 #define debug(x) ;
 #endif
 
-class Solution {
+void solve()
+{
+    /* int n;
+     cout << "Print i/p " << endl;
+     readInput(n);
+     cout << n << endl;
+     print(n);
 
-    public:
-    void solve(){
-        int n;cin >>n;
-        vector<pair<int,int>> v(n);
+     // double number = 3.14;
+     std::vector<int> vec = {1, 2, 3};
+     std::map<std::string, int> m = {{"one", 1}, {"two", 2}, {"three", 3}};
 
-        for(int i=0;i<n;i++){
-            int d;cin >>d;
-            v[i] = {d,i+1};
-        }
+     // // Printing different types
+     // print(number);
+     cout << "print vector with " << endl;
+     printVector(vec);
+     printMap(m); */
 
-        if(n == 1){
-            print(1);
-            return;
-        }
+    //----------------- START TO CODE FROM HERE
+    string st;
+    cin >> st;
+    int n = st.size();
 
-        sort(v.begin(),v.end());
+    string res = "";
+    for (int i = 0; i < n; i++)
+    {
+        char ch = st[i];
+        // convert upper to lower
+        if (ch >= 'A' && ch <= 'Z')
+            ch = ch - 'A' + 'a';
 
-        for(int i=1;i<n;i++){
-            int last = v[i-1].first,curr=v[i].first;
-            if(last == curr){
-                print("Still Rozdil");
-                return;
-            }
-        }
+        // now check is vowel
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' || ch == 'y')
+            continue;
 
-        cout << v[0].second <<endl;
+        // now add . before consonant
+        //  print(ch);
+        string temp = ".";
+        temp += ch;
+        // print(temp);
+
+        res += temp;
+        // cout << res << endl;
     }
-    /*
-        void solve(){
 
-            int n;cin >> n;
-            vector<int>v(n);
-
-            for(int i=0;i<n;i++) cin >> v[i];
-
-            if(n == 1) {
-                print(1);
-                return;
-            }
-            int res =1 ,mini=v[0],last=v[0];
-            bool isStillRoz = false,isMoveRes = true;
-
-            //o/w we need to traverse array
-            for(int i=1;i<n;i++){
-                int curr = v[i];
-                mini = min(mini,curr);
-
-                // still rozdil
-                if(curr < last && isMoveRes ) res ++;
-
-                else if(curr <= mini){
-                    isStillRoz = true;
-                    break;
-                }
-
-                if(curr > last) isMoveRes = false;
-
-                last = curr;
-            }
-
-            if(isStillRoz){
-                print("Still Rozdil");
-                return;
-            }
-            print(res);
-
-
-        }
-
-*/};
+    print(res);
+}
 
 int main()
 {
@@ -151,11 +126,9 @@ int main()
     fastio();
     auto start1 = high_resolution_clock::now();
     // int t; readInput(t);
-    int t=1;
-    for(int tc=0;tc<t;tc++){
-        Solution* sol = new Solution();
-        sol->solve();
-    }
+    int t = 1;
+    for (int tc = 0; tc < t; tc++)
+        solve();
     auto stop1 = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop1 - start1);
 #ifdef nik4furi

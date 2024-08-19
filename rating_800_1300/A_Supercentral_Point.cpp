@@ -69,78 +69,48 @@ void printMap(const std::map<K, V> &m)
 #define debug(x) ;
 #endif
 
-class Solution {
-
-    public:
-    void solve(){
+//-------------------- Solution class to write all of code inint
+class Solution
+{
+public:
+    void solve() {
         int n;cin >>n;
+        
         vector<pair<int,int>> v(n);
-
         for(int i=0;i<n;i++){
-            int d;cin >>d;
-            v[i] = {d,i+1};
+            int x,y;cin >> x >> y;
+            v[i] = {x,y};
         }
 
-        if(n == 1){
-            print(1);
-            return;
-        }
+        //now traverse the vector
+        int res = 0;
+        for(int i=0;i<n;i++){
+            int x=v[i].first,y=v[i].second;
+            bool isRight = false,isLeft=false,isUp =false,isDown = false;
 
-        sort(v.begin(),v.end());
+            for(int j=i+1;j<n;j++){
+                int tx = v[j].first,ty=v[j].second;
 
-        for(int i=1;i<n;i++){
-            int last = v[i-1].first,curr=v[i].first;
-            if(last == curr){
-                print("Still Rozdil");
-                return;
+                //right
+                if(x == tx && y < ty) isRight = true;
+                //left
+                else if(x == tx && y > ty) isLeft = true;
+
+                //up
+                else if(y == ty && x > tx) isUp = true;
+                
+                //down
+                else if(y == ty && x < tx) isDown = true;
+
+                if(isRight && isLeft && isUp && isDown) break;
             }
+            cout << x << " "<< y << " "<< isRight << "  "<<isLeft << " "<< isUp << " "<<isDown <<endl;
+            if(isRight && isLeft && isUp && isDown) res++;
         }
 
-        cout << v[0].second <<endl;
+        cout << res <<endl;
     }
-    /*
-        void solve(){
-
-            int n;cin >> n;
-            vector<int>v(n);
-
-            for(int i=0;i<n;i++) cin >> v[i];
-
-            if(n == 1) {
-                print(1);
-                return;
-            }
-            int res =1 ,mini=v[0],last=v[0];
-            bool isStillRoz = false,isMoveRes = true;
-
-            //o/w we need to traverse array
-            for(int i=1;i<n;i++){
-                int curr = v[i];
-                mini = min(mini,curr);
-
-                // still rozdil
-                if(curr < last && isMoveRes ) res ++;
-
-                else if(curr <= mini){
-                    isStillRoz = true;
-                    break;
-                }
-
-                if(curr > last) isMoveRes = false;
-
-                last = curr;
-            }
-
-            if(isStillRoz){
-                print("Still Rozdil");
-                return;
-            }
-            print(res);
-
-
-        }
-
-*/};
+};
 
 int main()
 {
@@ -150,12 +120,15 @@ int main()
 #endif
     fastio();
     auto start1 = high_resolution_clock::now();
-    // int t; readInput(t);
+    // int t;
+    // readInput(t);
     int t=1;
-    for(int tc=0;tc<t;tc++){
+    for (int tc = 0; tc < t; tc++)
+    {
         Solution* sol = new Solution();
         sol->solve();
     }
+
     auto stop1 = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop1 - start1);
 #ifdef nik4furi

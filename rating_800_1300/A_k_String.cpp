@@ -69,78 +69,59 @@ void printMap(const std::map<K, V> &m)
 #define debug(x) ;
 #endif
 
-class Solution {
+void solve()
+{
+   /* int n;
+    cout << "Print i/p " << endl;
+    readInput(n);
+    cout << n << endl;
+    print(n);
 
-    public:
-    void solve(){
-        int n;cin >>n;
-        vector<pair<int,int>> v(n);
+    // double number = 3.14;
+    std::vector<int> vec = {1, 2, 3};
+    std::map<std::string, int> m = {{"one", 1}, {"two", 2}, {"three", 3}};
 
-        for(int i=0;i<n;i++){
-            int d;cin >>d;
-            v[i] = {d,i+1};
-        }
+    // // Printing different types
+    // print(number);
+    cout << "print vector with " << endl;
+    printVector(vec);
+    printMap(m); */
 
-        if(n == 1){
-            print(1);
+    //----------------- START TO CODE FROM HERE
+    int k;cin >> k;
+    string st;cin >>st;
+
+    map<char,int>mp;
+
+    for(auto x:st)
+        mp[x] ++;
+
+    string res = "";
+    //now traverse map and check is divisible byk
+    for(auto it:mp){
+        if(it.second%k != 0){
+            print(-1);
             return;
         }
-
-        sort(v.begin(),v.end());
-
-        for(int i=1;i<n;i++){
-            int last = v[i-1].first,curr=v[i].first;
-            if(last == curr){
-                print("Still Rozdil");
-                return;
-            }
-        }
-
-        cout << v[0].second <<endl;
+       
     }
-    /*
-        void solve(){
 
-            int n;cin >> n;
-            vector<int>v(n);
+    //o/w we need to print a res string first, have all chars onces times
+    //to print res, inserting a char k-1 times only
+    for(auto it:mp){
 
-            for(int i=0;i<n;i++) cin >> v[i];
+        for(int i=0;i<it.second/k;i++) res += it.first;
+    }
+    string ans = res;
 
-            if(n == 1) {
-                print(1);
-                return;
-            }
-            int res =1 ,mini=v[0],last=v[0];
-            bool isStillRoz = false,isMoveRes = true;
+    //now print res for k times
+    for(int i=1;i<k;i++) 
+        ans += res;
 
-            //o/w we need to traverse array
-            for(int i=1;i<n;i++){
-                int curr = v[i];
-                mini = min(mini,curr);
-
-                // still rozdil
-                if(curr < last && isMoveRes ) res ++;
-
-                else if(curr <= mini){
-                    isStillRoz = true;
-                    break;
-                }
-
-                if(curr > last) isMoveRes = false;
-
-                last = curr;
-            }
-
-            if(isStillRoz){
-                print("Still Rozdil");
-                return;
-            }
-            print(res);
-
-
-        }
-
-*/};
+    print(ans);
+    
+        
+}
 
 int main()
 {
@@ -152,13 +133,12 @@ int main()
     auto start1 = high_resolution_clock::now();
     // int t; readInput(t);
     int t=1;
-    for(int tc=0;tc<t;tc++){
-        Solution* sol = new Solution();
-        sol->solve();
-    }
+    for(int tc=0;tc<t;tc++)
+        solve();
     auto stop1 = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop1 - start1);
 #ifdef nik4furi
     cerr << "Time: " << duration.count() / 1000 << endl;
 #endif
 }
+
