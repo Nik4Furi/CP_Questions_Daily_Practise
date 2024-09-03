@@ -1,6 +1,2 @@
-
-        int rem = y%k;
-        int first = y+(k-rem);
-        if(y+first > n){
-            print(-1);
-            return;
+int left = leftOdd%2,right=rightOdd%2;
+            int ans = min(left,right);
