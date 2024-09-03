@@ -73,31 +73,22 @@ void printMap(const std::map<K, V> &m)
 class Solution{
      public:
        void sol(){
-        int n,a,b,c;cin >> n >> a >> b >>c;
 
-        int arr[] = {a,b,c};
+            int n;cin >> n;
 
-        int res = 0;
-        sort(arr,arr+3);
+            vector<int>arr(n);
 
-        do{
-            int temp = n,i=0,cnt=0;
+            for(int i=0;i<n;i++) cin >> arr[i];
 
-        
+            sort(arr.begin(),arr.end());
+            ll sum = 0;
 
-            while( i < 3){
-                // cout << "vals "<< cnt << " "<< temp << " "<< arr[i] <<endl;
-                if(temp-arr[i] < 0){
-                    break;
-                }
-                ++cnt;                temp -= arr[i];
-                i++;
+            for(int i=0;i<n;i++){
+                int diff = abs(arr[i]-i-1);
+                sum += diff;
             }
-            res = max(res,cnt);
 
-        }while(next_permutation(arr,arr+3));
-
-        print(res);
+            print(sum);
        }
 };
 

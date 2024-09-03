@@ -69,36 +69,52 @@ void printMap(const std::map<K, V> &m)
 #define debug(x) ;
 #endif
 
+class Solution
+{
+public:
+    void sol()
+    {
+        vector<vector<char>> grid(4, vector<char>(4));
 
-class Solution{
-     public:
-       void sol(){
-        int n,a,b,c;cin >> n >> a >> b >>c;
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+                cin >> grid[i][j];
+        }
 
-        int arr[] = {a,b,c};
+        // Loop through all possible 2x2 subgrids
+        for (int r = 0; r < 3; r++) {
+            for (int c = 0; c < 3; c++) {
+                // Check the 2x2 subgrid starting at (r, c)
+                int black = 0, white = 0;
 
-        int res = 0;
-        sort(arr,arr+3);
+                // Top-left
+                if (grid[r][c] == '#') black++;
+                else white++;
 
-        do{
-            int temp = n,i=0,cnt=0;
+                // Top-right
+                if (grid[r][c + 1] == '#') black++;
+                else white++;
 
-        
+                // Bottom-left
+                if (grid[r + 1][c] == '#') black++;
+                else white++;
 
-            while( i < 3){
-                // cout << "vals "<< cnt << " "<< temp << " "<< arr[i] <<endl;
-                if(temp-arr[i] < 0){
-                    break;
+                // Bottom-right
+                if (grid[r + 1][c + 1] == '#') black++;
+                else white++;
+
+                // If 3 or more cells are the same color in the subgrid
+                if (black >= 3 || white >= 3) {
+                    cout << "YES" << endl;
+                    return;
                 }
-                ++cnt;                temp -= arr[i];
-                i++;
             }
-            res = max(res,cnt);
+        }
 
-        }while(next_permutation(arr,arr+3));
-
-        print(res);
-       }
+        // If no such 2x2 subgrid found
+        cout << "NO" << endl;
+    }
 };
 
 int main()
@@ -110,10 +126,11 @@ int main()
     fastio();
     auto start1 = high_resolution_clock::now();
     // int t; readInput(t);
-    int t=1;
-    for(int tc=0;tc<t;tc++){
-      Solution* s = new Solution();
-      s-> sol();
+    int t = 1;
+    for (int tc = 0; tc < t; tc++)
+    {
+        Solution *s = new Solution();
+        s->sol();
     }
     auto stop1 = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop1 - start1);
@@ -121,4 +138,3 @@ int main()
     cerr << "Time: " << duration.count() / 1000 << endl;
 #endif
 }
-
