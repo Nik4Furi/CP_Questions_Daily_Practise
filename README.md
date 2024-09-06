@@ -23,8 +23,9 @@
 ## <h2 id="demo" >Demo </h2>
 
 <p text-align=left>
-  <img src="" width="500" height="" alt="daily_cp_home"/>
-    
+  <img src="https://github.com/user-attachments/assets/d3705ce8-54fa-4fab-88bf-1965ebdfc832" width="500" height="" alt="daily_cp_home"/>
+
+
  </p>
  
 
@@ -43,9 +44,9 @@
 
 ## <h2 id="References">References </h2>
 
-| Title | Reference |
-| ----------------------- | ------------------------------ |
-| A20J Ladder | (rating 800 -> 1300)[https://earthshakira.github.io/a2oj-clientside/server/Ladder11.html] |
+| Title | Reference | Start Date | Completion Date |
+| ----------------------- | ------------------------------ | ------------------------- | ----------------------------- | 
+| A20J Ladder | [rating 800 -> 1300](https://earthshakira.github.io/a2oj-clientside/server/Ladder11.html) | 18-Aug-2k24 | 5-Sept-2k24 |
 
 
 <a href="#daily_cp">Go Home </a>
